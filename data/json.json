@@ -1,0 +1,23 @@
+{
+  "id": 1,
+  "name": "Alice",
+  "email": "alice@example.com",
+  "address": {
+    "street": "123 Apple St",
+    "city": "Wonderland",
+    "zip": "12345"
+  },
+  "orders": [
+    {
+      "order_id": 101,
+      "product": "Widget",
+      "quantity": 5
+    },
+    {
+      "order_id": 102,
+      "product": "Gadget",
+      "quantity": 3
+    }
+  ]
+}
+
