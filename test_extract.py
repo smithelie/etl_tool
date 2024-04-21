@@ -19,6 +19,10 @@ from extract import FileExtract, DatabaseExtract, APIExtract
 
 
 class TestFileExtract(unittest.TestCase):
+    '''
+    Tests the FileExtract class methods.
+    User must update [path_to_tabular_data] and [path_to_json_data] to match their system's absolute path to the cloned repository.
+    '''
     path_to_tabular_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular.csv' # user must update
     path_to_json_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/json.json' # user must update
 
@@ -38,6 +42,11 @@ class TestFileExtract(unittest.TestCase):
 
 
 class TestDatabaseExtract(unittest.TestCase):
+    '''
+    Tests the DatabaseExtract class methods.
+    User must update [connection_url] to match their system's absolute path to the cloned repository.
+    [connection_str] uses a relative path so updating this is optional.
+    '''
     connection_str = 'DRIVER=SQLite3;DATABASE=data/database.db'  # user can update (relative path used)
     connection_url = 'sqlite://///home/smith/Development/ds5010/github/ds5010/etl_tool/data/database.db'  # user must update
 
@@ -61,6 +70,14 @@ class TestDatabaseExtract(unittest.TestCase):
 
 
 class TestAPIExtract(unittest.TestCase):
+    '''
+    Tests the APIExtract class methods.
+    User must update [path_to_reddit_config_file] and [path_to_openweather_config_file] to match their system's
+    absolute path to the cloned repository.
+    Users must also provide their own credentials to test functionality of the APIExtract class.
+        -- Sign up for openweather API credentials: https://openweathermap.org/api
+        -- Sign up for reddit API credentials for use with PRAW (Python Reddit API Wrapper): https://praw.readthedocs.io/en/stable/getting_started/quick_start.html
+    '''
     path_to_reddit_config_file = '/home/smith/Development/ds5010/Secure/reddit_credentials.json' # user must update
     path_to_openweather_config_file = '/home/smith/Development/ds5010/Secure/open_weather_credentials.json' # user must update
 

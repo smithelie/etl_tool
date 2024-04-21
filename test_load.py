@@ -14,6 +14,10 @@ from load import Loader
 
 
 class TestLoader(unittest.TestCase):
+    '''
+    Tests the Loader class methods.
+    User must update [path_to_tabular_data_with_array] and [output_path_for_loader] to match their system's absolute path to the cloned repository.
+    '''
     path_to_tabular_data_with_array = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular_with_array_column.csv' # user must update
     output_path_for_loader = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/outbox/data_written_by_file_loader.csv' # user must update
 
