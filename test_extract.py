@@ -1,9 +1,17 @@
 '''
 Smith Elie
 DS5010: test_extract
-A suite of tests for testing the extract module.
-Sign up for openweather API credentials: https://openweathermap.org/api
-Sign up for reddit API credentials for use with PRAW (Python Reddit API Wrapper): https://praw.readthedocs.io/en/stable/getting_started/quick_start.html
+A suite of tests for testing the extract module classes.
+TestFileExtract:
+    - User must update [path_to_tabular_data] and [path_to_json_data] to match their system's absolute path to the cloned repository.
+TestDatabaseExtract:
+    - User must update [connection_url] to match their system's absolute path to the cloned repository.
+TestAPIExtract:
+    - User must update [path_to_reddit_config_file] and [path_to_openweather_config_file] to match their system's
+      absolute path to the cloned repository.
+    - Users must also provide their own credentials to test functionality of the APIExtract class.
+        -- Sign up for openweather API credentials: https://openweathermap.org/api
+        -- Sign up for reddit API credentials for use with PRAW (Python Reddit API Wrapper): https://praw.readthedocs.io/en/stable/getting_started/quick_start.html
 '''
 
 import unittest
@@ -11,8 +19,8 @@ from extract import FileExtract, DatabaseExtract, APIExtract
 
 
 class TestFileExtract(unittest.TestCase):
-    path_to_tabular_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular.csv'
-    path_to_json_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/json.json'
+    path_to_tabular_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular.csv' # user must update
+    path_to_json_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/json.json' # user must update
 
     def test_init_with_file_path(self):
         file_extractor = FileExtract(self.path_to_tabular_data)
@@ -30,39 +38,39 @@ class TestFileExtract(unittest.TestCase):
 
 
 class TestDatabaseExtract(unittest.TestCase):
-    connection_str = 'DRIVER=SQLite3;DATABASE=data/database.db'  # user supplied
-    connection_url = 'sqlite://///home/smith/Development/ds5010/github/ds5010/etl_tool/data/database.db'  # user supplied
+    connection_str = 'DRIVER=SQLite3;DATABASE=data/database.db'  # user can update (relative path used)
+    connection_url = 'sqlite://///home/smith/Development/ds5010/github/ds5010/etl_tool/data/database.db'  # user must update
 
     def test_init_with_conn_str(self):
-        database_extractor = DatabaseExtract(connection_str=self.connection_str)  # user supplied
+        database_extractor = DatabaseExtract(connection_str=self.connection_str)
         self.assertEqual('pyodbc', database_extractor.connection_type)  # expected vs actual. Assignment test.
 
     def test_init_with_conn_url(self):
-        database_extractor = DatabaseExtract(connection_url=self.connection_url)  # user supplied
+        database_extractor = DatabaseExtract(connection_url=self.connection_url)
         self.assertEqual('sqlalchemy', database_extractor.connection_type)  # expected vs actual. Assignment test.
 
     def test_query_with_conn_str(self):
-        database_extractor = DatabaseExtract(connection_str=self.connection_str)  # user supplied
+        database_extractor = DatabaseExtract(connection_str=self.connection_str)
         data_via_pyodbc = database_extractor.query('SELECT * FROM people LIMIT 3')
         self.assertEqual((3, 3), data_via_pyodbc.shape)
 
     def test_query_with_conn_url(self):
-        database_extractor = DatabaseExtract(connection_url=self.connection_url)  # user supplied
+        database_extractor = DatabaseExtract(connection_url=self.connection_url)
         data_via_sql_alchemy = database_extractor.query('SELECT * FROM people LIMIT 5')
         self.assertEqual((5, 3), data_via_sql_alchemy.shape)
 
 
 class TestAPIExtract(unittest.TestCase):
-    path_to_reddit_config_file = '/home/smith/Development/ds5010/Secure/reddit_credentials.json'
-    path_to_openweather_config_file = '/home/smith/Development/ds5010/Secure/open_weather_credentials.json'
+    path_to_reddit_config_file = '/home/smith/Development/ds5010/Secure/reddit_credentials.json' # user must update
+    path_to_openweather_config_file = '/home/smith/Development/ds5010/Secure/open_weather_credentials.json' # user must update
 
     def test_init(self):
-        api_extractor = APIExtract(config=self.path_to_reddit_config_file)  # user supplied
+        api_extractor = APIExtract(config=self.path_to_reddit_config_file)
         self.assertEqual(['client_id', 'client_secret'], list(api_extractor.config.keys()))
 
     def test_load_config(self):
-        api_extractor = APIExtract(config=self.path_to_reddit_config_file)  # user supplied
-        self.assertIsInstance(api_extractor.load_config(self.path_to_reddit_config_file), dict)  # user supplied
+        api_extractor = APIExtract(config=self.path_to_reddit_config_file)
+        self.assertIsInstance(api_extractor.load_config(self.path_to_reddit_config_file), dict)
 
     def test_fetch_data(self):
         api_extractor = APIExtract(config=self.path_to_openweather_config_file)
@@ -73,7 +81,7 @@ class TestAPIExtract(unittest.TestCase):
              'cod'], list(df.keys()))
 
     def test_get_top_n_reddit_posts(self):
-        api_extractor = APIExtract(config=self.path_to_reddit_config_file)  # user supplied
+        api_extractor = APIExtract(config=self.path_to_reddit_config_file)
         top_10_reddit_posts = api_extractor.get_top_n_reddit_posts(sub='python')
         self.assertEqual((10, 4), top_10_reddit_posts.shape)
 

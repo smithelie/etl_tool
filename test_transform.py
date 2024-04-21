@@ -1,7 +1,9 @@
 '''
 Smith Elie
 DS5010: test_extract
-A suite of tests for testing the transform module.
+A suite of tests for testing the transform module class.
+TestTransformer:
+    - User must update [path_to_tabular_data_with_array] and [path_to_json_data] to match their system's absolute path to the cloned repository.
 '''
 
 import unittest
@@ -11,8 +13,8 @@ from transform import Transformer
 
 
 class TestTransformer(unittest.TestCase):
-    path_to_tabular_data_with_array = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular_with_array_column.csv'
-    path_to_json_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/json.json'
+    path_to_tabular_data_with_array = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular_with_array_column.csv' # user must update
+    path_to_json_data = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/json.json' # user must update
 
     def test_init(self):
         # pass some raw data to an instance of the Transformer class for testing

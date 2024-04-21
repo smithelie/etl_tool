@@ -1,7 +1,9 @@
 '''
 Smith Elie
 DS5010: test_extract
-A suite of tests for testing the load module.
+A suite of tests for testing the load module class.
+TestLoader:
+    - User must update [path_to_tabular_data_with_array] and [output_path_for_loader] to match their system's absolute path to the cloned repository.
 '''
 
 import unittest
@@ -12,8 +14,8 @@ from load import Loader
 
 
 class TestLoader(unittest.TestCase):
-    path_to_tabular_data_with_array = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular_with_array_column.csv'
-    output_path_for_loader = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/outbox/data_written_by_file_loader.csv'
+    path_to_tabular_data_with_array = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/tabular_with_array_column.csv' # user must update
+    output_path_for_loader = '/home/smith/Development/ds5010/github/ds5010/etl_tool/data/outbox/data_written_by_file_loader.csv' # user must update
 
     def test_init(self):
         # pass some raw data to an instance of the Transformer class for testing
